@@ -1,11 +1,24 @@
 import fotoPerfil from '../assets/foto_de_perfil.jpg';
+import portada from '../assets/portada.jpg';
+import { useState } from 'react';
 import { FaFacebookSquare, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 export function SobreMi() {
+    const [estaTocado, setEstaTocado] = useState(false);
+
+    const manejarTocada = () => {
+
+        const pantallaCelular = window.matchMedia('(hover: none)').matches;
+
+        if (pantallaCelular) {
+            setEstaTocado(!estaTocado);s
+        }
+    };
     return(
-        <section id='sobre-mi' className="scroll-mt-40 md:scroll-mt-30 mt-40 flex flex-col items-center justify-center md:flex-row-reverse md:gap-16 md:px-8 md:mt-30">
-            <div className="border-4 border-[#27346F] rounded-full size-60 overflow-hidden md:size-96 md:shrink-0 ">
-                <img src={fotoPerfil} className='object-cover size-full'/>
+        <section onClick={manejarTocada} id='sobre-mi' className="scroll-mt-40 md:scroll-mt-30 mt-40 flex flex-col items-center justify-center md:flex-row-reverse md:gap-16 md:px-8 md:mt-30">
+            <div className="relative group border-4 border-[#27346F] rounded-full size-60 overflow-hidden md:size-96 md:shrink-0 ">
+                <img src={fotoPerfil} className={`object-cover size-full transition-all duration-500 ease-in-out ${ estaTocado ? 'opacity-0 scale-105' : 'opacity-100 scale-100'} group-hover:opacity-0 group-hover:scale-105`}/>
+                <img src={portada} className={`object-cover size-full absolute inset-0 transition-all duration-500 ease-in-out ${ estaTocado ? 'opacity-100 scale-100' : 'opacity-0 scale-105'} group-hover:opacity-100 group-hover:scale-105`}/>
             </div>
 
             <div className='flex flex-col items-center md:items-start'>
